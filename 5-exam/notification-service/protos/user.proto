@@ -1,0 +1,12 @@
+syntax="proto3";
+
+option go_package="./protos";
+
+
+
+message NewUser {
+    string email=1;
+    string name=2;
+    int32 user_id=3;
+}
+

@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+option go_package = "./genhotel";
+
+service HotelService {
+  rpc AddHotel(HotelReq) returns (AddHotelResponse);
+  rpc GetHotels (GetHotelsRequest) returns (GetHotelsResponse);
+  rpc GetHotelDetails (GetHotelDetailsRequest) returns (GetHotelDetailsResponse);
+  rpc CheckRoomAvailability (CheckRoomAvailabilityRequest) returns (CheckRoomAvailabilityResponse);
+}
+
+message AddHotelResponse {
+  int32 hotel_id = 1;
+}
+
+message GetHotelsRequest {}
+
+message GetHotelsResponse {
+  repeated HotelDetail hotels = 1;
+}
+
+message GetHotelDetailsRequest {
+  string hotel_id = 1;
+}
+
+message GetHotelDetailsResponse {
+  HotelDetail hotel = 1;
+}
+
+message CheckRoomAvailabilityRequest {
+  string hotel_id = 1;
+}
+
+message CheckRoomAvailabilityResponse {
+  repeated RoomAvailability roomAvailabilities = 1;
+}
+
+message HotelDetail {
+  int32 hotel_id=1;
+  string name = 2;
+  string location =3;
+  double rating = 4;
+  string address = 5;
+  repeated Room rooms = 6;
+
+}
+
+
+message HotelReq {
+  string name = 1;
+  string location =2;
+  double rating = 3;
+  string address = 4;
+  repeated Room rooms = 5;
+}
+
+message Room {
+  string roomType = 1;
+  double pricePerNight = 2;
+  bool availability = 3;
+}
+
+message RoomAvailability {
+  string roomType = 1;
+  int32 availableRooms = 2;
+}

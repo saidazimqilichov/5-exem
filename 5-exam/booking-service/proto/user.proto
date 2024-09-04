@@ -1,0 +1,62 @@
+syntax="proto3";
+
+option go_package="./genuser";
+
+message RegisterReq {
+    string name=1;
+    string email=2;
+    string password=3;
+    int32 age=4;
+}
+
+message RegisterResp{
+    string message=1;
+}
+
+message VerifyReq{
+    string email=1;
+    string code=2;
+}
+
+message VerifyResp {
+    int32 user_id=1;
+    string token=2;
+    string message=3;
+}
+
+message LoginReq {
+    string email=1;
+    string password=2;
+}
+
+message LoginResp{
+    int32 user_id=1;
+    string token=2;
+    string message=3;
+}
+
+message GetUserReq {
+    int32 user_id=1;
+}
+
+message GetUserResp{
+    int32 user_id=1;
+    repeated RegisterReq Response=2;
+}
+
+message DeleteUserReq {
+    int32 user_id=1;
+
+}
+
+message DeleteUserResp{
+    string message=1;
+}
+
+service UserService {
+    rpc RegisterUser(RegisterReq) returns(RegisterResp);
+    rpc VerifyUser(VerifyReq) returns(VerifyResp);
+    rpc LoginUser(LoginReq) returns(LoginResp);
+    rpc GetUser(GetUserReq) returns(GetUserResp);
+    rpc DeleteUser(DeleteUserReq) returns(DeleteUserResp);
+}
